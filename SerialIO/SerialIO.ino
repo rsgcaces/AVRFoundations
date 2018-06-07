@@ -8,6 +8,7 @@ uint8_t ch = 150;
 void setup() {
   Serial.begin(9600); // initialize the serial stream to 9600 baud (bits/s)
 }
+
 void loop() {
 //  while (!Serial.available());    //wait for a character to be entered
 //  ch = Serial.read();             //ok, grab it...
