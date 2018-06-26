@@ -17,17 +17,18 @@ struct RGB {        //definition of a composite data structure
   uint8_t greenPin; //green
   uint8_t bluePin;  //blue
 };
-RGB led = {3, 5, 6};//create a single instance of an RGB struct
+RGB led = {3, 4, 5, 6};//create a single instance of an RGB struct
 void setup() {
   pinMode(led.redPin, OUTPUT);
-  pinMode(led.gndPin, INPUT);
+  pinMode(led.gndPin, OUTPUT);
   pinMode(led.greenPin, OUTPUT);
   pinMode(led.bluePin, OUTPUT);
   digitalWrite(led.gndPin, LOW);
 }
 void loop() {
-  analogWrite(led.redPin, 255);   //start with an initial presentation
-  analogWrite(led.greenPin, 0);
-  analogWrite(led.bluePin, 0);
-  while (true);
+  analogWrite(led.redPin, random(256));   //start with an initial presentation
+  analogWrite(led.greenPin, random(256));
+  analogWrite(led.bluePin, random(256));
+  delay(100);
+ 
 }
