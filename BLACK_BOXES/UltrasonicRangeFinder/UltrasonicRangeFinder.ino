@@ -1,5 +1,5 @@
 // Program    :Ultrasonic Range Finder
-// Purpose    :Explore the HC-SR04
+// Purpose    :Explore the HC-SR04 URF
 // Author     :C. D'Arcy (adapted for RSGC ACES from various sources)
 // Date       :2018 06 29
 // Status     :Working
