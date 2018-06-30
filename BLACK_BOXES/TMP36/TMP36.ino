@@ -21,7 +21,7 @@ void setup() {                //one-time prep
 
 void loop() {
   rawADC = analogRead(sensorPin);     //obtain a reading from he TMP36
-  delay(DURATION);                    //pause (include time for ADC to settle)
+  delay(DURATION);                    //pause (includes time for ADC to settle)
                                       //conversion: rawADC > mV > #degC > offset...
   tempC = map(rawADC, 0, 1024, 0, vRef * 1000) / 10.0 - 50.0;
   // Publish results
