@@ -10,11 +10,13 @@
 uint8_t sensorPin = A0;   //use the first analog input pin, why not?
 uint16_t rawADC;          //the raw 10-bit ADC reading
 float vRef = 5.0;         //define the voltage reference (2.7V <-> 5.0V)
+//float vRef = 3.3;       //lowering the voltage reference increases resolution and improve accuracy
 float tempC;              //the temperature in degrees Celsius
 
 void setup() {                //one-time prep
   Serial.begin(9600);         //establish the baud rate for communication
   pinMode(sensorPin, INPUT);  //will be reading an analog voltage
+//  analogReference(EXTERNAL);  //for voltage 
 }
 
 void loop() {
