@@ -16,7 +16,7 @@ float tempC;              //the temperature in degrees Celsius
 void setup() {                //one-time prep
   Serial.begin(9600);         //establish the baud rate for communication
   pinMode(sensorPin, INPUT);  //will be reading an analog voltage
-//  analogReference(EXTERNAL);  //for voltage 
+//  analogReference(EXTERNAL);  //for voltages other than the DEFAULT 5 VDC 
 }
 
 void loop() {
