@@ -5,14 +5,14 @@ uint8_t r = 4;
 char buff[20];
 void setup() {
   Serial.begin(9600);
-  Serial.println("Enter the number of distinct objects...");
+  Serial.print("Enter the number of distinct objects...");
   while (!Serial.available());
   n = Serial.parseInt();
   Serial.readString();
-  Serial.println("How many at a time?(<=" + String(n) + ")...");
+  Serial.print(String(n)+"\nHow many at a time?(<=" + String(n) + ")...");
   while (!Serial.available());
   r = Serial.parseInt();
-  sprintf(buff, "P(%d,%d)=%d", n, r, perms(n, r));
+  sprintf(buff, "%d\nP(%d,%d)=%d", r, n, r, perms(n, r));
   Serial.println(buff);
 }
 void loop() {}
