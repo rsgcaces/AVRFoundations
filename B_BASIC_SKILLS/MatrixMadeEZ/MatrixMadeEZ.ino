@@ -1,7 +1,7 @@
 // PROJECT  :MatrixMadeEZ
 // PURPOSE  :Demo program of the MatrixMadeEZ Device (original design by H. Reed)
 // AUTHOR   :C. D'Arcy
-// DATE     :2018 09 15
+// DATE     :2018 09 16
 // uC       :328
 // STATUS   :Working
 // REFERENCE:https://cdn-shop.adafruit.com/datasheets/1079datasheet.pdf
@@ -10,7 +10,7 @@ uint8_t dimmer = 9;
 uint8_t latch = 10;
 uint8_t clk = 11;
 uint8_t data = 12;
-uint8_t colData = 0xF0;
+uint8_t colData = 0x80;
 uint8_t rowData = 0x80;
 
 void setup() {
