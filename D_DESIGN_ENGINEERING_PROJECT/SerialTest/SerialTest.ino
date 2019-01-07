@@ -1,5 +1,5 @@
 // PROJECT  :SerialTest 
-// PURPOSE  :Simple sketch to expose the difference between the println and write functions...
+// PURPOSE  :Sketch to expose the difference between the println and write functions...
 // DEVICE   :AVR 8 bit
 // AUTHOR   :C. D'Arcy
 // DATE     :2019 01 08
@@ -11,7 +11,7 @@ void setup() {
   Serial.println();
   Serial.write(65);           // displays the ASCII character equivalent of the number... 
   Serial.write(605);          // displays the ASCII character equivalent of the number... 
-  Serial.println(65);         // display the number 65 followed by a CR (13) 
+  Serial.println(65);         // display the exact number, followed by a CR (13) 
 }
 
 // Enter a digit from the Serial Monitor and examine the different responses
