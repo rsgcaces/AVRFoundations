@@ -3,7 +3,7 @@
 //          :of the print, println, write, and read functions of the Serial Class
 // DEVICE   :8-bit AVR
 // AUTHOR   :C. D'Arcy
-// DATE     :2019 01 10
+// DATE     :2019 01 12
 // uC       :328/84/85
 // COURSE   :Prepared for 2018-2019 ICS3U
 // STATUS   :Working
@@ -19,7 +19,8 @@ void setup() {
   Serial.println();     // places the 8-bit value of 13 (carriage return) into the serial stream
   Serial.write(65);     // places the 8-bit value (65) in the serial stream
   Serial.write(605);    // places only the LOW byte of the number in the serial stream, discarding the rest
-  Serial.println(65);   // parses the number into as many decimal (default) digits as required
+  Serial.print('A');    // places the ASCII value of the character into the serial stream
+  Serial.println(65);   // println parses the integer into as many decimal (default) digits as required
   // and places the ASCII value of each (48-57) into the the serial stream
   // followed by the 8-bit value of 13 (carriage return)
 }
