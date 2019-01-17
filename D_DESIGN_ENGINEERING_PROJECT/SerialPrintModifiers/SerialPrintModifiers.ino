@@ -43,9 +43,19 @@ void loop() {
     Serial.print(x, OCT);  // print as an ASCII-encoded octal
     Serial.print("\t");    // prints a tab
 
-    Serial.println(x, BIN);  // print as an ASCII-encoded binary
+    Serial.println(x, BIN); // print as an ASCII-encoded binary
+    //displayBinary(x);       //activate for full 8-bit binary display
     // then adds the carriage return with "println"
     delay(200);            // delay 200 milliseconds
   }
-  Serial.println();        // prints another carriage return
+  Serial.println("--End of sequence--");        // prints another carriage return
+  while(true);
 }
+
+// This alternative function can be used to display full 8-bit binary numbers
+void displayBinary(uint8_t data) {
+  for (int8_t i = 7; i >= 0; i--)
+    Serial.print(data & (1 << i) ? 1 : 0);
+  Serial.println();
+}
+
