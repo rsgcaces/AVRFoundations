@@ -1,4 +1,4 @@
-// PROJECT  :SerialTest
+// PROJECT  :SerialEchoTest
 // PURPOSE  :Explore the behaviour of Serial Communication (UART peripheral) through the use
 //          :of the print, println, write, and read functions of the Serial Class
 // DEVICE   :8-bit AVR
