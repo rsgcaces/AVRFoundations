@@ -1,5 +1,5 @@
 // PROJECT  :Serial1HzSquareWave
-// PURPOSE  :Places a sqaure wave in the seril stream to be picked up by a listener (Processing)
+// PURPOSE  :Places a digital square wave in the serial stream to be picked up by a listener (Processing)
 // DEVICE   :Arduino
 // AUTHOR   :C. D'Arcy
 // DATE     :2019 01 15
