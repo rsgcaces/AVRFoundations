@@ -3,7 +3,7 @@
 //          :This client sketch requests blink behaviour on the Server Arduino
 // DEVICE   :2 UNOs
 // AUTHOR   :C. D'Arcy
-// DATE     :2019 01 12
+// DATE     :2019 01 21
 // uC       :*
 // COURSE   :ICS3U
 // STATUS   :Working
@@ -25,6 +25,6 @@ void setup() {
 void loop() {
   Serial.write('H');      //request the server turn on its LED
   delay(ONDURATION);      //admire...
-  Serial.write('L');      //requst the server turn off its LED
-  delay(ONDURATION >> 2); //wait...
+  Serial.write('L');      //request the server turn off its LED
+  delay(ONDURATION >> 2); //OFF for 1/4 of the time ON (80% duty cycle)
 }
