@@ -1,11 +1,11 @@
 // PROJECT  :Chat
 // PURPOSE  :Utility to enable a conversation between ACES' Arduino users
 // DEVICE   :2 Arduinos
-// AUTHOR   :Lots of people
+// AUTHOR   :Many hands
 // DATE     :2019 01 24
 // uC       :328
 // COURSE   :ICS3U
-// STATUS   :(Possibly) Working
+// STATUS   :Working
 // REFERENCE:https://www.arduino.cc/en/Tutorial/SoftwareSerialExample
 //          :https://www.instructables.com/id/Simple-Chat-Program-with-Arduino-Uno/
 // NOTES    :Receives from the hardware serial, sends to hardware & software serial.
