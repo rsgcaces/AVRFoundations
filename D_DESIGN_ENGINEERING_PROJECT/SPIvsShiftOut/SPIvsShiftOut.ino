@@ -1,28 +1,23 @@
-// PROJECT  :
-// PURPOSE  :
-// DEVICE   :
+// PROJECT  :SPIvsShiftOut
+// PURPOSE  :A slight code variation (for flexibility) from our previous SPIShiftOut sketch 
+// DEVICE   :Arduino + Morland Bargraph
 // AUTHOR   :C. D'Arcy
 // DATE     :2019 02 02
 // uC       :328/84/85
 // COURSE   :ICS3U/ICS4U
 // STATUS   :Working
 // REFERENCE:https://shift-register.org/2017/spi-vs-shiftout-on-arduino-and-attiny
-// NOTES    :
-// Simple test program to shift out some bits to measure the difference between
-// different Atmel chips and SPI vs. shiftOut()
+// NOTES    :Simple test program to shift out some bits to measure the difference between
+//          :different Atmel chips and SPI vs. shiftOut()
 #include <SPI.h>
-// Arduino Uno
 #define RCLK_PIN SS // latching pin for the shift registers to show values at their outputs
 #define DATA_PIN MOSI
 #define CLK_PIN  SCK
-//
-
 /* for attiny85
   #define RCLK_PIN 4 // latching pin for the shift registers to show values at their outputs
   #define DATA_PIN 1
   #define CLK_PIN  2
 */
-
 // pick one of these
 //#define SHIFTMODE
 #define SPIMODE
