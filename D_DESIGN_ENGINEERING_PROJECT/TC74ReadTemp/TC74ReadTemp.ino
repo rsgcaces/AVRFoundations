@@ -26,9 +26,9 @@ void loop(){
   Wire.requestFrom(TC74ADDRESS, 1); //request 1 byte from the device with specified address
   while (Wire.available() == 0);    //wait for response
   int8_t celsius = Wire.read();     //read 1 byte from SDA buffer into a variable
-  int8_t fahrenheit = round(celsius * 1.8 + 32.0);  //convert from celsius to fahrenheit
+  float fahrenheit = round(celsius * 1.8 + 32.0);  //convert from celsius to fahrenheit
 
-  Serial.print(String(celsius,1)+"C,\t");           //echo data to the Serial Monitor
+  Serial.print(String(celsius)+"C,\t");           //echo data to the Serial Monitor
   Serial.print(String(fahrenheit,1)+"F\n");
   delay(DURATION);                                  //pause
 }
