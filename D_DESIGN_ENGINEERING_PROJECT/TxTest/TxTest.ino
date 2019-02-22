@@ -23,7 +23,7 @@ void setup() {
   Serial.begin(9600);                     //log the activity
   configurePotentiometer();               //set the pot up as a voltage divider on PORT C
   radio.begin();                          //invoke the radio object
-  radio.setPALevel(RF24_PA_LOW);          //closer ange so minimum power sufficient
+  radio.setPALevel(RF24_PA_LOW);          //close range so minimum power sufficient
   radio.setChannel(CHANNEL);              //Tx and Rx communication on same channel
   //https://tmrh20.github.io/RF24/classRF24.html#af2e409e62d49a23e372a70b904ae30e1
   radio.openWritingPipe(addresses[0]);    //Transmit assumes these pipes
