@@ -16,12 +16,10 @@
 uint8_t midBlock[8] = {0, 0, 0x1F, 0x1F, 0x1F, 0x1F, 0, 0};
 //Pin assignments below are LCD Appliance-compatible
 //Control and Data lines are restricted to PORTD
-uint8_t RS = 7, RW = 9, EN = 6, D4 = 5, D5 = 4, D6 = 3, D7 = 2;
+uint8_t RS = 7, EN = 6, D4 = 5, D5 = 4, D6 = 3, D7 = 2;
 LiquidCrystal lcd(RS, EN, D4, D5, D6, D7);
 
 void setup() {
-  Serial.begin(9600);
-  DDRB = 0xFC;                      //configure all LCD Control and Data lines for output
   DDRC = 0x05;                      //configure pot's outer legs (A&C)(A0&A2), for output
   PORTC = 0x04;                     //set A0 to LOW and A2 to HIGH (A1 is input)
   lcd.begin(LCD_COLUMNS, LCD_ROWS); //initialize LCD screen
