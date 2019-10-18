@@ -14,34 +14,34 @@
 
 // Define the 7-Segment Uppercase Letter LookUp Table...
 uint8_t segmentMap[] = {   //Segment order: ABCDEFG.
-  B11101110,  //A or 0xEE or O356
-  B00111110,  //B or 0x3E or O076
-  B10011100,  //C or 0x9C or O234
-  B01111010,  //D or 0x7A or O172
-  B10011110,  //E or 0x9E or O236
-  B10001110,  //F or 0x8E or O216
-  B10111100,  //G or 0xBC or O274
-  B00101110,  //H or 0x2E or O056
-  B01100000,  //I or 0x60 or O140
-  B01111000,  //J or 0x78 or O170
-  B00000000,  //K or 0x   or O        // you complete the rest...
-  B00000000,  //L or 0x   or O
-  B00000000,  //M or 0x   or O
-  B00000000,  //N or 0x   or O
-  B00000000,  //O or 0x   or O
-  B00000000,  //P or 0x   or O
-  B00000000,  //Q or 0x   or O
-  B00000000,  //R or 0x   or O
-  B00000000,  //S or 0x   or O
-  B00000000,  //T or 0x   or O
-  B00000000,  //U or 0x   or O
-  B00000000,  //V or 0x   or O
-  B00000000,  //W or 0x   or O
-  B00000000,  //X or 0x   or O
-  B00000000,  //Y or 0x   or O
-  B00000000   //Z or 0x   or O
+  0B11101110,  //A or 0xEE or O356
+  0B00111110,  //B or 0x3E or O076
+  0B10011100,  //C or 0x9C or O234
+  0B01111010,  //D or 0x7A or O172
+  0B10011110,  //E or 0x9E or O236
+  0B10001110,  //F or 0x8E or O216
+  0B10111100,  //G or 0xBC or O274
+  0B00101110,  //H or 0x2E or O056
+  0B01100000,  //I or 0x60 or O140
+  0B01111000,  //J or 0x78 or O170
+  0B00000000,  //K or 0x   or O        // you complete the rest...
+  0B00000000,  //L or 0x   or O
+  0B00000000,  //M or 0x   or O
+  0B00000000,  //N or 0x   or O
+  0B00000000,  //O or 0x   or O
+  0B00000000,  //P or 0x   or O
+  0B00000000,  //Q or 0x   or O
+  0B00000000,  //R or 0x   or O
+  0B00000000,  //S or 0x   or O
+  0B00000000,  //T or 0x   or O
+  0B00000000,  //U or 0x   or O
+  0B00000000,  //V or 0x   or O
+  0B00000000,  //W or 0x   or O
+  0B00000000,  //X or 0x   or O
+  0B00000000,  //Y or 0x   or O
+  0B00000000   //Z or 0x   or O
 };
-uint8_t sizeMap = sizeof(segmentMap);    //numner of entries in the LUT
+uint8_t sizeMap = sizeof(segmentMap);    //number of entries in the LUT
 
 //Compiler (preprocessor) directives (allows for readable case labels!)
 #define newLine 10      // Serial input line terminator       
