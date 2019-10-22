@@ -4,16 +4,16 @@
 // AUTHOR   :C. D'Arcy
 // DATE     :2019 10 22
 // MCU      :328p
-// STATUS   :Working
+// STATUS   :(Soon to be) Working
 
+// Do not forget to add this library in all sketches
 #include <EEPROM.h>
 
 void setup() {
   Serial.begin(9600);
   while (!Serial);
-  // 1. display the size of the 328p EEPROM (available numebr of bytes)
+  // 1. display the size of the 328p EEPROM (available number of bytes)
   // Hint: look for the definition in the iom328p.h file of predefined constants
-  Serial.println("There are " + String(E2END + 1) + " bytes of EEPROM on the 328p");
   // 2. Read and display the contents of EEPROM to the Serial Monitor in decimal
   // in the form: [ADDR]VALUE as in,
   //[0000]0
@@ -22,9 +22,6 @@ void setup() {
   //[0214]123
   //...
   //[1023]0
-  for (int address = 0; address <= E2END; address++)
-    Serial.println("[" + String(address) + "]" + String(EEPROM.read(address)));
-
   // 3. Any observations made from the previous output?
   // 4. Move your previous loop solution in a function (call it display())
   //    because we'd like to reuse it without copying it every time we need it
