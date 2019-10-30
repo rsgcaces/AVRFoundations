@@ -5,16 +5,17 @@
 // AUTHOR   :In class
 // DATE     :2019 10 31
 // MCU      :328p
-// STATUS   :Not Working
+// STATUS   :Not Working (yet)
 // REFERENCE:https://www.youtube.com/watch?v=fQTR-yc7o8M
 
-uint8_t clockPin = 13;    //best associated with SCK
-uint8_t dataPin = 11;     //best associated with MOSI
-uint8_t latchPin = 10;    //best associated with SS
-uint8_t brightPin = 9;    //PWM for '595 brightness control on /OE pin
+uint8_t clockPin = 13;          //best associated with SCK
+uint8_t dataPin = 11;           //best associated with MOSI
+uint8_t latchPin = 10;          //best associated with SS
+uint8_t brightPin = 9;          //PWM for '595 brightness control on /OE pin
 
-#define LEVEL 240;        //PWM: 0-full on, 255-full off (non-linear)
-#define BASE 10           //decimal, for now..
+#define LEVEL 240;              //PWM: 0-full on, 255-full off (non-linear)
+#define BASE 10                 //decimal, for now..
+#define BASESQUARED (BASE*BASE) //(dependent) define
 
 uint8_t digitalMap[] = {
   //ABCDEFG.              //to be defined...
