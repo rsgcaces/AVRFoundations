@@ -37,7 +37,7 @@ void setup() {
   //display for confirmation...
   Serial.println("SwapBytes:\t" + String(swapBytes, HEX));
   //I'll leave this task to you...
-  // In a single statement, uncommnet the following statement and
+  // In a single statement, uncomment the following statement and
   // reverse the order of the nibbles on this16!
   // reverseNibbles = ?
   //The output should be: dcba
