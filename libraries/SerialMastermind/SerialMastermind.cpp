@@ -2,8 +2,8 @@
 // PURPOSE  :SerialMastermind::Class implementation
 // COURSE   :ICS3U
 // AUTHOR   :C. D'Arcy
-// DATE     :2019 11 30
-// MCU      :328P (two)
+// DATE     :2019 12 07
+// MCU      :328P (dual)
 // STATUS   :Working
 #include "Arduino.h"
 #include <SoftwareSerial.h>
@@ -13,7 +13,7 @@ SoftwareSerial chat(SM_RX, SM_TX);
 //Constructor options...
 SerialMastermind::SerialMastermind() {
   helper();
-  _setCode = true;
+  _solicit = true;
 }
 
 SerialMastermind::SerialMastermind(uint8_t num) {
@@ -31,6 +31,12 @@ SerialMastermind::SerialMastermind(char color1, char color2, char color3) {
   helper();
 }
 
+SerialMastermind::SerialMastermind(String str) {
+  _color1 = str.charAt(0);
+  _color2 = str.charAt(1);
+  _color3 = str.charAt(2);
+  helper();
+}
 void SerialMastermind::helper() {
   pinMode(SM_R1, OUTPUT);
   pinMode(SM_G1, OUTPUT);
@@ -65,13 +71,37 @@ void SerialMastermind::showCode() {
 
 void SerialMastermind::begin(boolean instructions) {
   Serial.begin(9600);
-  Serial.print("Welcome to the ACES Serial Mastermind Activity");
+  Serial.println("ACES Serial Mastermind Activity");
+  Serial.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
   if (instructions)
     showInstructions();
+  //This is probably how the game should work..
+  //Users are required to submit their code to through the Serial input box...
+  if (_solicit) {
+    Serial.println("Enter your secret 3-character code (eg. RRB, gGB, BbB) then click Send...");
+    Serial.println("(Note. An incorrect code entry will result in a random code chosen for you)");
+    while (!Serial.available());
+    _code = Serial.readString();      //grab what the user entered
+    if (!valid()) {                   //Did the user enter exactly three characters?
+      Serial.println("Invalid Code: " + _code);
+      _setRandomCode = true;          //if not, it will generate a random code
+    }
+  }
+}
+
+boolean SerialMastermind::valid() {
+  if (_code.length() != 4) return false;
+  _color1 = _code.charAt(0) & ~32;
+  _color2 = _code.charAt(1) & ~32;
+  _color3 = _code.charAt(2) & ~32;
+  if ( !((_color1 == 'R') | (_color1 == 'G') | (_color1 == 'B'))) return false;
+  if ( !((_color2 == 'R') | (_color2 == 'G') | (_color2 == 'B'))) return false;
+  if ( !((_color3 == 'R') | (_color3 == 'G') | (_color3 == 'B'))) return false;
+  return true;
 }
 
 void SerialMastermind::playGame() {
-  if (_setCode) {
+  if (_setRandomCode) {
     randomSeed(analogRead(A5));
     uint8_t number = analogRead(A5) % 27;
     _color1 = _choices[number / 9];
@@ -80,7 +110,6 @@ void SerialMastermind::playGame() {
   }
   showCode();
   thinking();
-  //allOff();
   displaySummary();
   prompt();
   chat.begin(9600);
@@ -89,7 +118,7 @@ void SerialMastermind::playGame() {
       _guess = chat.readString();
       uint8_t result = analysis();
       Serial.println("Confirming analysis of " + _code + " by " + _guess + " as " + String(result));
-      chat.println(String(result));
+      chat.println(String(result/10)+String(result%10));
     }
     if (Serial.available())  {            //anything outgoing?
       _entry = Serial.readString();
@@ -104,7 +133,7 @@ void SerialMastermind::playGame() {
         while (!chat.available());
         _response = chat.readString();
         _response = _response.substring(0, 3);
-//        Serial.println(_response.length());
+        //        Serial.println(_response.length());
         _responses[_numGuesses] = _response;
         _numGuesses++;
         displaySummary();
@@ -177,11 +206,15 @@ uint8_t SerialMastermind::analysis() {
 
 void SerialMastermind::showInstructions() {
   Serial.println("Instructions...");
-  Serial.println("1. To win you must crack your opponent's 3-colour RGB code");
-  Serial.println("   in no more than 6 (valid) attempts.");
+  Serial.println("1. To win, you must crack your opponent's 3-colour RGB code");
+  Serial.println("   faster than your opponent (maximum 6 attempts)");
   Serial.println("2. Accepted codes are RRR, rgR, Bgg, etc.");
-  Serial.println("3. Two-digit response codes are the number of correct colors");
-  Serial.println("   followed by the number of correct positions (33 earns the win).");
+  Serial.println("3. Two-digit response codes are to be interpreted as");
+  Serial.println("      the number of CORRECT COLOURS in the CORRECT POSITION");
+  Serial.println("   followed by,");
+  Serial.println("      the number of CORRECT colours");
+  Serial.println("4. A response of 30 signifies you've cracked your opponents code!");
+  Serial.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 }
 
 uint8_t SerialMastermind::getRxPin() {

@@ -17,19 +17,21 @@ class SerialMastermind {
     SerialMastermind();
     SerialMastermind(uint8_t num);
     SerialMastermind(char color1, char color2, char color3);
+    SerialMastermind(String str);
     void begin(boolean instructions);
     uint8_t getActive();
     uint8_t getRxPin();
     void allOff();
     char getColor(uint8_t i);
     void guess();
+    void setCode();
     void playGame();
   private:
     char _color1;
     char _color2;
     char _color3;
     String _code = "RRR";
-    boolean _setCode = false;
+    boolean _setRandomCode = false;
     void helper();
     uint8_t analysis();
     void showCode();
@@ -37,7 +39,9 @@ class SerialMastermind {
     void showInstructions();
     void prompt();
     void displaySummary();
+    boolean valid();
     uint8_t _numGuesses = 0;
+    boolean _solicit = false;
     char _choices[3] = {'R', 'G', 'B'};
     String _entry;
     String _request;
