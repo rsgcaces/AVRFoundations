@@ -16,8 +16,8 @@ A custom PCB appliance game board was designed and manufactured by JLCLabs. The 
 to yield 27 different secret code combinations. Each player's secret code is obscured from his opponent's view by a 3D printed cover developed by J. Dolgin (ACES '20). This area will be referred to as the 'dugout'.
 
 ### Class: SerialMastermind
-The Arduino C class (<code>SerialMastermind.h</code> and <code>SerialMastermind.cpp</code>) was developed to support local *hardware* serial communications to the player's Serial Monitor through pins 0 and 1 (Rx/Tx) and 
-*software serial* communication to the opponent's UNO through pins 7 and 8 (Rx/Tx).<br><br>The class handles the suggested code and response exchanges as well as monotiring for the win, 
+The Arduino C class (<code>SerialMastermind.h</code> and <code>SerialMastermind.cpp</code>) was developed to support local **hardware** serial communications to the player's Serial Monitor through pins 0 and 1 (Rx/Tx) and 
+**software** serial communication to the opponent's UNO through pins 7 and 8 (Rx/Tx).<br><br>The class handles the suggested code and response exchanges as well as monitoring for the win, 
 which it signals by lighting the onboard green LED when the game is won.
 
 ## The Game
