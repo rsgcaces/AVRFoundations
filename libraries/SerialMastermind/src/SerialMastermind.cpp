@@ -47,6 +47,8 @@ void SerialMastermind::helper() {
   pinMode(SM_R3, OUTPUT);
   pinMode(SM_G3, OUTPUT);
   pinMode(SM_B3, OUTPUT);
+  pinMode(winPin,OUTPUT);
+  digitalWrite(winPin,LOW);
   allOff();
 }
 
@@ -137,8 +139,10 @@ void SerialMastermind::playGame() {
         _responses[_numGuesses] = _response;
         _numGuesses++;
         displaySummary();
-        if (_response.toInt() == 30)
+        if (_response.toInt() == 30){
+          digitalWrite(winPin,HIGH);
           Serial.println("CORRECT!");
+        }
         else
           prompt();
       }

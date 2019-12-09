@@ -1,5 +1,6 @@
 #ifndef SerialMastermind_h
 #define SerialMastermind_h
+#define winPin 13
 #define SM_R1 12
 #define SM_G1 11
 #define SM_B1 10
@@ -32,14 +33,6 @@ class SerialMastermind {
     char _color3;
     String _code = "RRR";
     boolean _setRandomCode = false;
-    void helper();
-    uint8_t analysis();
-    void showCode();
-    void thinking();
-    void showInstructions();
-    void prompt();
-    void displaySummary();
-    boolean valid();
     uint8_t _numGuesses = 0;
     boolean _solicit = false;
     char _choices[3] = {'R', 'G', 'B'};
@@ -50,7 +43,15 @@ class SerialMastermind {
     uint8_t _numOfEach[3] = {0, 0, 0};
     String _guesses[6] = {"---", "---", "---", "---", "---", "---"};
     String _responses[6] = {"--", "--", "--", "--", "--", "--"};
-
+    //functions
+    void helper();
+    uint8_t analysis();
+    void showCode();
+    void thinking();
+    void showInstructions();
+    void prompt();
+    void displaySummary();
+    boolean valid();
 };
 
 #endif
