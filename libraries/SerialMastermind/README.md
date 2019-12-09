@@ -1,4 +1,6 @@
-# SerialMastermind  [![PCB Appliance](images/SerialMastermindV2.png)]
+# SerialMastermind  
+
+<p align="center>![PCB Appliance](images/SerialMastermindV2.png)</p>
 
 ## Beginnings
 A comprehensive project, based loosely on the *Mastermind* board game from the 1970s, was conceived and developed in the Fall of 2019 to support the ICS3U introduction to Serial Communication.
