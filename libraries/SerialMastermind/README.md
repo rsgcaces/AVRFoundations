@@ -1,5 +1,5 @@
 # SerialMastermind
-![GitHub Logo](/images/logo.png)
+![GitHub Logo](/images/SerialMastermindV2.png)
 ##Beginnings
 A comprehensive project, based loosely on the *Mastermind* board game from the 1970s, was concieved and developed in the Fall of 2019 to support the ICS3U introduction to Serial Communication.
 
