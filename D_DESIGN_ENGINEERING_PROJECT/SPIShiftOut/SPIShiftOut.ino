@@ -1,9 +1,9 @@
 // PROJECT  :SPIShiftOut
-// PURPOSE  :To highlight the overlap between SPI (hardware) and ShiftOut (software) by 
+// PURPOSE  :To highlight the overlap between SPI (hardware) and ShiftOut (software) by
 //          :shifting out a single byte to a Morland Bargraph
-// DEVICE   :Arduino UNO + 595 Shift Register
+// DEVICE   :Arduino UNO + Morland Bargraph V3 (595 Shift Register)
 // AUTHOR   :C. D'Arcy
-// DATE     :2019 01 31
+// DATE     :2020 02 12
 // uC       :328p
 // COURSE   :ICS3U/ICS4U
 // STATUS   :Working
@@ -14,13 +14,15 @@
 //          :SPI peripheral on the UNO. They are strikingly similar but each has their own
 //          :advantages and disadvantages depending on your application.
 #include <SPI.h>
-#define VALUE 0x03          //sample data to upload for confirmation and comparison
+#define VALUE 0xAA          //sample data to upload for confirmation and comparison
 
 void setup() {
   Serial.begin(9600);       //Useful for time benchmarks to compare speeds
+  pinMode(9,OUTPUT);
+  digitalWrite(9,LOW);
   //comment out one or the other...
-  // softwareShiftOut();
-  hardwareShiftOut();
+  softwareShiftOut();
+  //hardwareShiftOut();
 }
 
 void softwareShiftOut() {
@@ -28,7 +30,7 @@ void softwareShiftOut() {
   pinMode(MOSI, OUTPUT);    //Master Out Slave In (pin 11). No need for MISO (12) in this example
   pinMode(SS, OUTPUT);      //Slave Select (pin 10)
   digitalWrite(SS, LOW);
-  shiftOut(MOSI, SCK, LSBFIRST, VALUE); //No control over transfer parameters
+  shiftOut(MOSI, SCK, MSBFIRST, VALUE); //No control over transfer parameters
   digitalWrite(SS, HIGH);
 }
 
@@ -37,11 +39,10 @@ void hardwareShiftOut() {
   SPI.begin();              //pulls SCK and MOSI low, and SS high. Default: MSBFIRST
   //SPI.beginTransaction(SPISettings(14000000, LSBFIRST, SPI_MODE0)); //optional
   digitalWrite(SS, LOW);    //
-  SPI.transfer(VALUE);
-  digitalWrite(SS, HIGH);
+  SPI.transfer(VALUE);      //
+  digitalWrite(SS, HIGH);   //
   SPI.end();                //disables SPI Bus (leaving pin modes unchanged)
   //SPI.endTransaction();   //optional (use with SPI.beginTransaction above)
 }
 
-void loop() {
-}
+void loop() {}
