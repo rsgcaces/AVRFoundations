@@ -1,7 +1,7 @@
 // PROJECT  :SPIShiftOut
-// PURPOSE  :To highlight the overlap between SPI (hardware) and ShiftOut (software) by
-//          :shifting out a single byte to a Morland Bargraph
-// DEVICE   :Arduino UNO + Morland Bargraph V3 (595 Shift Register)
+// PURPOSE  :To highlight the overlap between the speed of hardware SPI and the flexibility
+//          :of software shiftOut by transmitting a byte to a 595 Shift Register
+// DEVICE   :Arduino UNO + Morland Bargraph V3 (insert appliance as shown)
 // AUTHOR   :C. D'Arcy
 // DATE     :2020 02 12
 // uC       :328p
@@ -9,40 +9,41 @@
 // STATUS   :Working
 // REFERENCE:http://darcy.rsgc.on.ca/ACES/TEI3M/images/SPIConcept.png
 //          :http://darcy.rsgc.on.ca/ACES/TEI3M/SPICommunication/images/SPIvsShiftOut.png
-// NOTES    :This (revealing) code highlights and contrasts the difference between the use
-//          :of the (software-based) shiftOut library function and the (hardware-based)
-//          :SPI peripheral on the UNO. They are strikingly similar but each has their own
-//          :advantages and disadvantages depending on your application.
+// NOTES    :Hardware SPI (fast) and software shiftOut (flexible) are not identical but 
+//          :strikingly similar in their digital waveform behaviour.
+//          :This code highlights and contrasts the differences between their usage
+//          :on familiar hardware. Explore which one serves each of your applications better.
 #include <SPI.h>
-#define VALUE 0xAA          //sample data to upload for confirmation and comparison
+#define OENABLE 9             //MBV3 pin for Output Enable
+#define VALUE 0x18            //sample data to upload for confirmation and comparison
 
 void setup() {
-  Serial.begin(9600);       //Useful for time benchmarks to compare speeds
-  pinMode(9,OUTPUT);
-  digitalWrite(9,LOW);
+  pinMode(OENABLE, OUTPUT);   //595's output enable pin must be pulled
+  digitalWrite(OENABLE, LOW); //LOW to display its storage registers
+  pinMode(MISO, OUTPUT);      //No need for MISO(12) in this example...
+  digitalWrite(MISO, HIGH);   //...instead, use as a temporary 5V source
   //comment out one or the other...
-  softwareShiftOut();
-  //hardwareShiftOut();
+  softwareShiftOut();         //use flexible shiftOut function
+  //hardwareShiftOut();       //use fast SPI
 }
 
-void softwareShiftOut() {
-  pinMode(SCK, OUTPUT);     //System Clock (pin 13) (exploit predefines:)
-  pinMode(MOSI, OUTPUT);    //Master Out Slave In (pin 11). No need for MISO (12) in this example
-  pinMode(SS, OUTPUT);      //Slave Select (pin 10)
-  digitalWrite(SS, LOW);
+void softwareShiftOut() {     //Exploit predefines in pins_arduino.h
+  pinMode(SCK, OUTPUT);       //System Clock (pin 13)
+  pinMode(MOSI, OUTPUT);      //Master Out Slave In (pin 11)
+  pinMode(SS, OUTPUT);        //Slave Select (pin 10)
   shiftOut(MOSI, SCK, MSBFIRST, VALUE); //No control over transfer parameters
-  digitalWrite(SS, HIGH);
+  digitalWrite(SS, LOW);      //create a rising edge on the Slave Select pin
+  digitalWrite(SS, HIGH);     //to transfer bits from shift to storage registers
 }
 
 void hardwareShiftOut() {
   //Initializes the SPI bus setting SCK, MOSI, and SS to outputs,
-  SPI.begin();              //pulls SCK and MOSI low, and SS high. Default: MSBFIRST
-  //SPI.beginTransaction(SPISettings(14000000, LSBFIRST, SPI_MODE0)); //optional
-  digitalWrite(SS, LOW);    //
-  SPI.transfer(VALUE);      //
-  digitalWrite(SS, HIGH);   //
-  SPI.end();                //disables SPI Bus (leaving pin modes unchanged)
-  //SPI.endTransaction();   //optional (use with SPI.beginTransaction above)
+  SPI.begin();                //pulls SCK and MOSI low, and SS high. Default: MSBFIRST
+  //digitalWrite(SS, LOW);    //true SPI requires Slave Select LOW to identify specfic target
+  SPI.transfer(~VALUE);       //invert the output for ease of interpretation
+  digitalWrite(SS, LOW);      //pull Slave Select LOW to identify target device
+  digitalWrite(SS, HIGH);     //release target device
+  SPI.end();                  //disables SPI Bus (leaving pin modes unchanged)
 }
 
 void loop() {}
