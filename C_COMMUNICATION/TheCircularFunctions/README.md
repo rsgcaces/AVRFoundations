@@ -2,32 +2,16 @@
 
 ![PCB Appliance](images/JoystickActiveMid.jpg)
 
-## Beginnings
-A comprehensive project, based loosely on the *Mastermind* board game from the 1970s, was conceived and developed in the Fall of 2019 to support the ICS3U introduction to Serial Communication.
-Tutorials and more project information are available on the [ACES Serial Mastermind homepage](http://darcy.rsgc.on.ca/ACES/Projects/SerialMastermind/index.html).
+## Background
+An interest in applied mathematics led me to imagine the ACES program almost two decades ago.  With our program well-established in 2020, I remain fascinated by manners in which our prototypes and projects demonstrate the principles (and wonders) of mathematics.
+Curriculum concepts leading in to, and out of, the March Break, in both our ICS3U and ICS4U courses (Serial Communication, Processing, rotational mechanics and the DDP to be precise) inspired me to create a simple hardware and software system to demonstrate an important interpretation in mathematics that I'm not the extent to which it reveals itself the standard math curriculum, 
 
-## Components
+	The Circular Functions
 
-### Arduino UNO
-Each of two players provides their own Arduino UNO and cable, capable of displaying content to his Serial Monitor.
-
-### PCB (Appliance)
-A custom PCB appliance game board was designed and manufactured by JLCLabs. The appliance is inserted into each of two players' Arduino UNOs. Three RGB LEDs (ABRA) are used in place of pegs
-to yield 27 different secret code combinations. Each player's secret code is obscured from his opponent's view by a 3D printed cover developed by J. Dolgin (ACES '20). This area will be referred to as the 'dugout'.
-
-### Class: SerialMastermind
-The Arduino C class (<code>SerialMastermind.h</code> and <code>SerialMastermind.cpp</code>) was developed to support local **hardware** serial communications to the player's Serial Monitor through pins 0 and 1 (Rx/Tx) and 
-**software** serial communication to the opponent's UNO through pins 7 and 8 (Rx/Tx).<br><br>The class handles all the code guesses and response exchanges as well as monitoring for the win, 
-which it signals by lighting the onboard green LED when the game is won.
-
-## Preparation
-The game client (<code>SerialMastermind.ino</code>) is the same for both players. Once the UNOs are conjoined by the SerialMastermind Appliance, each player opens and uploads the client.
-
-## The Game
-1. On opening the Serial Monitor, each player is prompted to enter his three-character secret code which will appear in his dugout and reported back on his screen.
-2. Players submit a three-character guess in the Serial Monitor's text box (case-**in**sensitive), followed by either Send or Enter. 
-3. Guesses are summarized in the form of a Response Table indicating both the number of colours in the correct position (the first number) followed by the number of correct colours.
-4. A response code of **30** indicates a win. 
-5. A maximum of 6 guesses are permitted.
-
-
+Now, you know them well as the suite of six trigonometric functions, and their dividends in determining the angles and side lengths of triangles. Indeed, the Greek etymology of the word itself  (tri-3, gon-corner angle, metric-measure) speaks directly to this application. 
+However, what may possibly elude students who graph these functions on the Cartesian plane is the intimate relationship all six  share as a point travels the circumeference of a circle.  Analysis of points travelling on a circular path are common in physics and  mechanical engineering and, as such, linking this behaviour to the trigonometric functions is indispensable.
+The image to the right is of the backdrop to tomorrow's presentation. For the hardware component, I simply inserted a [ http://darcy.rsgc.on.ca/ACES/images/ThumbJoystick.jpg ]Thumb Joystick into an Arduino, read and scaled the dual potentiometer readings and placed the value on the Serial Output stream.
+On the software side, I Wrote a Processing sketch that read that placed a unit circle against a minimal Cartesian Plane before reading the Serial Stream Joystcik data in order to render the six related line segments, one for each circular (trig) function.
+In this context, the value of the respective function is the length of a line segment between to points determined exclusively by the angle formed by the (black) radius and positive horizontal axis.  
+For those that would like to give this a try at home, you'll find the two sketches (Arduino and Processing) posted on the Grade 11 AVR Foundations Github under [ https://github.com/rsgcaces/AVRFoundations/tree/master/C_COMMUNICATION/TheCircularFunctions ]The Circular Functions.
+  
