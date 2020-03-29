@@ -111,8 +111,8 @@ void composeRxR() {
   RxR.strokeWeight(1);
   RxR.line(mapX(minX), mapY(0), mapX(maxX), mapY(0));
   RxR.line(mapX(0), mapY(minY), mapX(0), mapY(maxY));
-  RxR.text("u", mapX(1.8), mapY(-0.2));
-  RxR.text("v", mapX(-0.2), mapY(1.8));
+  RxR.text("u", mapX(1.4), mapY(-0.1));
+  RxR.text("v", mapX(-0.1), mapY(1.4));
   RxR.textFont(numbers, 32);
   RxR.text("The Circular Functions", 375, 670);
   RxR.text("1.0", mapX(1.0), mapY(-0.2));
@@ -170,6 +170,7 @@ void composePot(int horz, int vert) {
 
 
   Pot.strokeWeight(8);
+ 
   //tan
   Pot.stroke(0, 0, 255);
   Pot.line(coordX, coordY, xInt, originY);
@@ -192,8 +193,8 @@ void composePot(int horz, int vert) {
   Pot.line(coordX, originY, coordX, coordY);
   //cos
   Pot.stroke(0, 255, 0);
-  Pot.line(originX, originY, coordX, originY);
-  
+  Pot.line(originX, coordY, coordX, coordY);
+ 
   //draw the point on the unit circle...
   Pot.stroke(0);
   Pot.ellipse(coordX, coordY, 10, 10);
