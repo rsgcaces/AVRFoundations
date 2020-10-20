@@ -2,7 +2,7 @@
 // PURPOSE  :Introduction to 1D bitshifting animation technique on the Morland Bargraph
 // COURSE   :ICS3U
 // AUTHOR   :C. D'Arcy
-// DATE     :2019 11 19
+// DATE     :2020 10 20
 // MCU      :328p/84/85/...
 // STATUS   :? Working
 // REFERENCE:http://darcy.rsgc.on.ca/ACES/TEI3M/BargraphScrolling.html
@@ -11,12 +11,13 @@
 #define dataPin
 #define latchPin
 // animation variables...replace 0s with something meaningful
+uint8_t sprite = 0xE0;
 uint32_t buff  = 0;
 uint16_t scrollSpeed = 0;
 uint8_t count  = 0;
 
 void setup() {
-  // set pin states and any other ont-time initializations...
+  // set pin states and any other one-time initializations...
 }
 
 void loop() {
