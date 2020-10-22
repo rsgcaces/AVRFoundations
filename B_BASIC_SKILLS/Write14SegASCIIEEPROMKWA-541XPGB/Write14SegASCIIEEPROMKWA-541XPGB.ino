@@ -1,44 +1,48 @@
-// PROJECT  :Write14SegUpperCaseCharacters
+// PROJECT  :Write14SegASCIIEEPROMKWA-541XPGB
 // PURPOSE  :Writes a lookup table of 14 segments (word) for the uppercase ASCII
 //          :characters to EEPROM 
 // COURSE   :ICS3U
 // AUTHOR   :C. D'Arcy
-// DATE     :2019 10 19
+// DATE     :2020 10 22
 // MCU      :328p
-// STATUS   :Working
+// STATUS   :? Working (untested)
 // REFERENCE:http://darcy.rsgc.on.ca/ACES/TEI3M/1920/Tasks.html#PoV
-
+// REFERENCE:Segment Map:
+//           http://darcy.rsgc.on.ca/ACES/TEI3M/images/16SegmentCharMap.png
 #include <EEPROM.h>       //requires the support of this Arduino library
 
-// Define the 14-Segment Uppercase Letter LookUp Table...
+// Define the 14-Segment Uppercase Letter LookUp Table optimized for:
+// https://mail.rsgc.on.ca/~cdarcy/Datasheets/KWA-541CPGB.pdf
 uint16_t segmentMap[] = {
-  //ABCDEFGHJKLMNP__ :Segment order
-  0b1110110010001000,  //A or 0xEC88 or O166210
-  0b1111001010100000,  //B or 0xF2A0 or O?
-  0b1001110000000000,  //C or 0x9C00 or O
-  0b1111001000100000,  //D or 0xF220 or O
-  0b1001110010001000,  //E or 0x9C88 or O
-  0b1000110010001000,  //F or 0x8C88 or O
-  0b1011110010000000,  //G or 0xBC80 or O
-  0b0110110010001000,  //H or 0x or O
-  0b1001001000100000,  //I or 0x or O
-  0b0111100000000000,  //J or 0x or O
-  0b0000110101001000,  //K or 0x or O        
-  0b0001110000000000,  //L or 0x   or O
-  0b0110110100000100,  //M or 0x   or O
-  0b0110110001000100,  //N or 0x   or O
-  0b1111110000000000,  //O or 0x   or O
-  0b1100110010001000,  //P or 0x   or O
-  0b1111110001000000,  //Q or 0x   or O
-  0b1100110011001000,  //R or 0x   or O
-  0b1011010010001000,  //S or 0x   or O
-  0b1000001000100000,  //T or 0x   or O
-  0b0111110000000000,  //U or 0x   or O
-  0b0000110100010000,  //V or 0x   or O
-  0b0110110001010000,  //W or 0x   or O
-  0b0000000101010100,  //X or 0x   or O
-  0b0000000100100100,  //Y or 0x   or O
-  0b1001000100010000   //Z or 0x   or O
+  //Pins:     18 17  -  15 14 13 12 - 10 | 1  2  3  4  5  6  7  8  9
+  //Segments: F   H      J  K G1  A    B   E L  nc  M  N  G2 D dp  C
+  //FHJKABELMNDC0000   // template
+  0b1000111000010000,  //A or 0x8E10 or O107020
+  0b0000000000000000,  //B or 0x? or O?
+  0b0000000000000000,  //C or 0x? or O?
+  0b0000000000000000,  //D or 0x? or O?
+  0b0000000000000000,  //E or 0x? or O?
+  0b0000000000000000,  //F or 0x? or O?
+  0b0000000000000000,  //G or 0x? or O?
+  0b0000000000000000,  //H or 0x or O
+  0b0000000000000000,  //I or 0x or O
+  0b0000000000000000,  //J or 0x or O
+  0b0000000000000000,  //K or 0x or O        
+  0b0000000000000000,  //L or 0x or O
+  0b0000000000000000,  //M or 0x or O
+  0b0000000000000000,  //N or 0x or O
+  0b0000000000000000,  //O or 0x or O
+  0b0000000000000000,  //P or 0x or O
+  0b0000000000000000,  //Q or 0x or O
+  0b0000000000000000,  //R or 0x or O
+  0b0000000000000000,  //S or 0x or O
+  0b0000000000000000,  //T or 0x or O
+  0b0000000000000000,  //U or 0x or O
+  0b0000000000000000,  //V or 0x or O
+  0b0000000000000000,  //W or 0x or O
+  0b0000000000000000,  //X or 0x or O
+  0b0000000000000000,  //Y or 0x or O
+  0b0000000000000000   //Z or 0x or O
 };
 uint8_t sizeMap = sizeof(segmentMap) >> 1;  //number of entries in the LUT
 
