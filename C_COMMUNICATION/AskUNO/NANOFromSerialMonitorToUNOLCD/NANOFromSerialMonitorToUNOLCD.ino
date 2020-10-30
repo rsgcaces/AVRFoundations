@@ -1,15 +1,15 @@
-// PROJECT  :UNOLCDFromNANOHost
-// PURPOSE  :Stage 2a of the 2020/2021 TEI3M Ask UNO project
-// DEVICE   :UNO+LCD Appliance+NANO+LCD
+// PROJECT  :NANOFromSerialMonitorToUNOLCD
+// PURPOSE  :Stage 2b of the 2020/2021 TEI3M Ask UNO project
+// DEVICE   :NANO+LCD+UNO+LCD Appliance
 // AUTHOR   :C. D'Arcy
 // DATE     :2020 10 30
 // uC       :*
 // COURSE   :ICS3U
 // STATUS   :To be developed in class
 // REFERENCE:https://www.arduino.cc/en/Reference/LiquidCrystal
-// REFERENCE:https://www.adafruit.com/product/1447 
+// REFERENCE:https://www.adafruit.com/product/1447
 #include <SoftwareSerial.h>
-SoftwareSerial chat(8,9); // RX, TX
+SoftwareSerial chat(8, 9); // RX, TX
 
 #include <LiquidCrystal.h>        //LCD Library...
 #define LCD_COLUMNS 16            //Number of columns in Character LCD screen
@@ -24,9 +24,12 @@ void setup() {
   lcd.begin(LCD_COLUMNS, LCD_ROWS); //initialize LCD screen
   lcd.clear();                      //erase the LCD screen
   lcd.setCursor(0, 0);              //position display cursor at home
-  lcd.print("UNO Assistant");    //provide an instruction on the first line
+  lcd.print("NANO: Enter text");   //provide an instruction on the first line
   chat.begin(9600);
-  while(!chat);
+  while (!chat);
+  Serial.begin(9600);
+  while (!Serial);
 }
 
-void loop() {}
+void loop() {
+}
