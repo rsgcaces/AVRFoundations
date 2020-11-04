@@ -1,8 +1,12 @@
 // PROJECT  :Processing to RGB LED Display
-// PURPOSE  :AVR Foundations: Black Boxes
+// PURPOSE  :Responds to Processing RGBColorPicker characters 
+//          : over hardware Serial Port to turn on a specific RGB LED
 // AUTHOR   :C. D'Arcy
-// DATE     :2018 07 25
-// uC       :328
+// DATE     :2020 11 04
+// uC       :328p (UNO/Nano)
+// GITHUB   :AVR Foundations/COMMUNICATIONS/RGBColorPicker/ProcessingtoRGB.ino
+// NOTES    :Ensure the Processing application (RGBColorPicker.pde)
+//          :is not running so this application has the use of the Serial port 
 uint8_t sequence[] = {B0000, B0001, B0100, B0101, B1000, B1001, B1100, B1101};
 char index;
 void setup() {
