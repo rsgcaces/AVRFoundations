@@ -1,8 +1,10 @@
-/**
- * RGB Color Picker 
- * Provides a graphic interface in which to manipulate Arduino functionality
- * over the Serial port
- */
+// PROGRAM  :RGBColorPicker
+// PURPOSE  :Provides a graphic interface in which to manipulate Arduino functionality over hardware Serial Port
+// AUTHOR   :C. D'Arcy (modified from Processing Example/Serial)
+// DATE     :2020 11 04
+// uC       :328p (UNO/Nano)
+// GITHUB   :AVR Foundations/COMMUNICATIONS/RGBColorPicker/
+// NOTES    :The Arduino sketch (ProcessingtoRGB.ino) should be running on the UNO/Nano
 
 import processing.serial.*;
 
