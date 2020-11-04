@@ -1,4 +1,4 @@
-// PROJECT  :Processing to RGB LED Display
+// PROJECT  :Processing-to-RGB LED Display
 // PURPOSE  :Responds to Processing RGBColorPicker characters 
 //          : over hardware Serial Port to turn on a specific RGB LED
 // AUTHOR   :C. D'Arcy
