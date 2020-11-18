@@ -2,7 +2,7 @@
 // PURPOSE  :Utility to enable a peer-peer conversation between ACES' Arduino users
 // DEVICE   :2 Arduinos
 // AUTHOR   :Many hands
-// DATE     :2020 02 15
+// DATE     :2020 11 17
 // uC       :328p
 // COURSE   :ICS3U
 // STATUS   :Working
@@ -10,20 +10,22 @@
 //          :http://darcy.rsgc.on.ca/ACES/Projects/SerialMastermind/index.html
 // NOTES    :Hardware serial used to Rx/Tx from/to local Serial Monitor
 //          :Software serial used to Tx/Rx to/from peer
-
+//          :Be sure to wire a Common Ground line!
 #include <SoftwareSerial.h>
-SoftwareSerial chat(7,8); // RX, TX
-#define BAUD 9600         //Common BAUD rate for hardware UART and Software Serial
+#define RX  7
+#define TX  8
+SoftwareSerial chat(RX,TX); //Software Emulation of hardware UART
+#define BAUD 9600           //Common BAUD rate for hardware UART and Software Serial
 
-char ch;                  //single utility character for communication
+char ch;                    //single utility character for communication
 
 void setup() {
   Serial.begin(BAUD);     //use the hardware UART for the Serial Monitor
-  while (!Serial);        //wait for serial port to connect
+  while (!Serial);        //wait for hardware serial port to connect
   Serial.println("Starting Chat Program...");
   chat.begin(BAUD);       //set the data rate for the SoftwareSerial port
-
-  delay(1000);                        //let things settle...
+  while(!chat);           //wait for software serial port to connect                       
+  
   chat.println("Hello, world?");      //anyone home?
   Serial.println("Ready to chat..."); //local connection ready...
 }
