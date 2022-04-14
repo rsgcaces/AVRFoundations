@@ -1,14 +1,17 @@
 // PROJECT  :SPIvsShiftOutV2
-// PURPOSE  :Demonstrates the similarity between software SPI (shiftOut) and hardware SPI (transfer)
+// PURPOSE  :Demonstrates similarity between ShiftOut(software) vs SPI (hardware)
 // COURSE   :ICS3U
 // AUTHOR   :C. D'Arcy
-// DATE     :2020 03 24
+// DATE     :2022 04 14
 // MCU      :328P
 // STATUS   :Working
 // REFERENCE:Hardware prototype to be as depicted on the right side of this image:
 //          :http://darcy.rsgc.on.ca/ACES/TEI3M/images/MorlandV3Versatility.png 
+// NOTES    :Introduces additional compiler directives(#if, #else, #endif, etc.)
+//          : to customize (minimize) code footprint
 
 #define HARDWARE_SHIFT false
+
 #if HARDWARE_SHIFT
 #include <SPI.h>
 #endif
@@ -21,6 +24,7 @@ void setup() {
 
 #if HARDWARE_SHIFT
   SPI.begin();
+
 #else
   pinMode(SCK, OUTPUT);
   pinMode(MISO, OUTPUT);
@@ -29,15 +33,15 @@ void setup() {
 }
 
 void loop() {
-  digitalWrite(SS, LOW);
-
-#if HARDWARE_SHIFT
-  SPI.transfer(i);
-#else
-  shiftOut(MOSI, SCK, MSBFIRST, i);
+  digitalWrite(SS, LOW);              //select the target device
+  
+#if HARDWARE_SHIFT                    //apply the desired transfer protocol...
+  SPI.transfer(i);                    // hardware? (faster)
+ #else
+  shiftOut(MOSI, SCK, MSBFIRST, i);   // software? (slower, but more flexible?)
 #endif
 
-  digitalWrite(SS, HIGH);
-  delay(DURATION);
-  i = i ? i << 1 : 1;
+  digitalWrite(SS, HIGH);             //complete the transfer by releasing the device
+  delay(DURATION);                    //pause and admire....
+  i = i ? i << 1 : 1;                 //continue
 }
