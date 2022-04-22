@@ -1,6 +1,6 @@
 // PROJECT  :RxTest
 // PURPOSE  :To display an incoming byte from TxTemp on a Morland bargraph
-// DEVICE   :Arduino + AVES nRF Breakout Board + nRF24L01
+// DEVICE   :Arduino + ACES nRF Breakout Board + nRF24L01
 // AUTHOR   :C. D'Arcy
 // DATE     :2019 02 09
 // uC       :328p
@@ -8,15 +8,17 @@
 // STATUS   :Working (with TxTest)
 // REFERENCE:http://darcy.rsgc.on.ca/ACES/TEI3M/CommunicationProtocols.html#RF1
 //          :https://tmrh20.github.io/RF24/classRF24.html
-//          :https://mail.rsgc.on.ca/~cdarcy/Datasheets/nRF24L01.pdf
+//          :http://darcy.rsgc.on.ca/ACES/Datasheets/nRF24L01.pdf
 #include <RF24.h>
 #define CHANNEL 100             //any value between 0 and 125 (2.400GHz to 2.525GHz)
 uint8_t receivedData;           //for receiver to store the incoming byte
-uint8_t clockPin = 14;          //aka A0 (PC0)
-uint8_t latchPin = 15;          //aka A1 (PC1)
-uint8_t dataPin = 16;           //aka A2 (PC2)
-uint8_t groundPin = 17;         //aka A3 (PC3)
-uint8_t powerPin = 18;          //aka A4 (PC4)
+uint8_t groundPin = 14;         //aka A0 (PC0)
+uint8_t clockPin = 15;          //aka A1 (PC1)
+uint8_t powerPin = 16;          //aka A2 (PC2)
+uint8_t dataPin = 17;           //aka A3 (PC3)
+uint8_t latchPin = 18;          //aka A4 (PC4)
+uint8_t enablePin = 19;         //aka A5 (PC5)
+
 
 RF24 radio(9, 10);                            //CE (Chip Enable/Disable), CSN(SS)
 uint8_t addresses[][6] = {"1Node", "2Node"};  //pipe names (See Reference 2)
@@ -25,7 +27,9 @@ void setup() {
   Serial.begin(9600);           //invoke the local terminal window
   while (!Serial);              //wait for full activation
   configureBargraph();          //set up the Morland bargraph
-
+ //The next two statement are optional (confirmation only)
+  displayData(255);             //confirm display working...
+  delay(3000);                  //pause
   radio.begin();                //invoke the radio
   radio.setPALevel(RF24_PA_LOW);//set low power amplification for close proximity
   radio.setChannel(CHANNEL);    //mutually agreeable frequency offset(2.400GHz to 2.525GHz)
@@ -51,7 +55,7 @@ void displayData(uint8_t rec) {
   digitalWrite(latchPin, HIGH);                 //connect shift regs to storage register
 }
 
-//Our Rx display device is a Morland Bargraph inserted into PC0-PC4
+//Our Rx display device is a Morland Bargraph inserted into PC0-PC5
 void configureBargraph() {
   //DDRC = B11111000;                 //preferred register alternative to next 5 statements
   pinMode(clockPin, OUTPUT);          //declare all 5 Morland pins for output
@@ -59,7 +63,9 @@ void configureBargraph() {
   pinMode(dataPin, OUTPUT);           //
   pinMode(groundPin, OUTPUT);         //
   pinMode(powerPin, OUTPUT);          //
+  pinMode(enablePin, OUTPUT);          //
   digitalWrite(groundPin, LOW);       //sink
+  digitalWrite(enablePin, LOW);       //sink
   //PORTC |= 1<<PC4;                  //preferred register alternative to next statement
   digitalWrite(powerPin, HIGH);       //source
 }

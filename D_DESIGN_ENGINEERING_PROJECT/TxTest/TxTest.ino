@@ -2,13 +2,13 @@
 // PURPOSE  :To continually transmit a byte-scaled reading from a trim pot
 // DEVICE   :2x(Arduino + nrF24L01)
 // AUTHOR   :C. D'Arcy
-// DATE     :2019 02 09
+// DATE     :Updated: 2022 04 22
 // uC       :328p
 // COURSE   :ICS3U
 // STATUS   :Working (with RxTest)
 // REFERENCE:http://darcy.rsgc.on.ca/ACES/TEI3M/CommunicationProtocols.html#RF1
 //          :https://tmrh20.github.io/RF24/classRF24.html
-//          :https://mail.rsgc.on.ca/~cdarcy/Datasheets/nRF24L01.pdf
+//          :http://darcy.rsgc.on.ca/ACES/Datasheets/nRF24L01.pdf
 #include <RF24.h>
 RF24 radio(9, 10);              //CE (Chip Enable/Disable), CSN(SS)
 byte addresses[][6] = {"1Node", "2Node"};
@@ -44,4 +44,3 @@ void configurePotentiometer() {
   digitalWrite(APin, HIGH);     //establish full potential difference...
   digitalWrite(BPin, LOW);      //...on outer legs of the pot
 }
-
