@@ -16,7 +16,7 @@
 // REFERENCE:https://www.arduino.cc/en/Reference/LiquidCrystalCreateChar
 uint8_t midBlock[8] = {0, 0, 0x1F, 0x1F, 0x1F, 0x1F, 0, 0};
 //Pin assignments below are LCD Appliance-compatible
-uint8_t RS = 9, EN = 8, D4 = 7, D5 = 6, D6 = 5, D7 = 4;
+uint8_t EN = 9, RS = 8, D4 = 7, D5 = 6, D6 = 5, D7 = 4;
 LiquidCrystal lcd(RS, EN, D4, D5, D6, D7);
 
 void setup() {
