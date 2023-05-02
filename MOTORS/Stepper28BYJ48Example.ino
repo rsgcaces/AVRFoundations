@@ -2,7 +2,7 @@
 // PURPOSE  :Support for demonstration to ICS3U class
 // COURSE   :ICS3U
 // AUTHOR   :C. D'Arcy
-// DATE     :2020 04 28. Confirmed 2023 05 01
+// DATE     :2020 04 28. Confirmed: 2023 05 02.
 // MCU      :328P (Nano)
 // MOTOR    :MOT-28BYJ-48  (32 teeth, 11.25 degrees between teeth)
 // STATUS   :Working
@@ -56,62 +56,63 @@ void loop() {
 }
 
 //single step through the firing sequence for the currect drive option...
-//Note: This is hardcoded for half-stepping...for demonstration purposes
+//Note1: This is hardcoded for half-stepping...for demonstration purposes
+//Note2: A HIGH to the ULN2003 pulls the coil end low.    
 void takeStep() {
   switch (step) {
     case 0:
-      digitalWrite(IN1, LOW);     //BLUE
-      digitalWrite(IN2, HIGH);    //PINK
-      digitalWrite(IN3, HIGH);    //YELLOW
-      digitalWrite(IN4, HIGH);    //ORANGE
+      digitalWrite(IN1, HIGH);     //BLUE
+      digitalWrite(IN2, LOW);    //PINK
+      digitalWrite(IN3, LOW);    //YELLOW
+      digitalWrite(IN4, LOW);    //ORANGE
       break;
     case 1:
-      digitalWrite(IN1, LOW);
-      digitalWrite(IN2, LOW);
-      digitalWrite(IN3, HIGH);
-      digitalWrite(IN4, HIGH);
+      digitalWrite(IN1, HIGH);
+      digitalWrite(IN2, HIGH);
+      digitalWrite(IN3, LOW);
+      digitalWrite(IN4, LOW);
       break;
     case 2:
-      digitalWrite(IN1, HIGH);
-      digitalWrite(IN2, LOW);
-      digitalWrite(IN3, HIGH);
-      digitalWrite(IN4, HIGH);
+      digitalWrite(IN1, LOW);
+      digitalWrite(IN2, HIGH);
+      digitalWrite(IN3, LOW);
+      digitalWrite(IN4, LOW);
       break;
     case 3:
-      digitalWrite(IN1, HIGH);
-      digitalWrite(IN2, LOW);
-      digitalWrite(IN3, LOW);
-      digitalWrite(IN4, HIGH);
-      break;
-    case 4:
-      digitalWrite(IN1, HIGH);
-      digitalWrite(IN2, HIGH);
-      digitalWrite(IN3, LOW);
-      digitalWrite(IN4, HIGH);
-      break;
-    case 5:
-      digitalWrite(IN1, HIGH);
-      digitalWrite(IN2, HIGH);
-      digitalWrite(IN3, LOW);
-      digitalWrite(IN4, LOW);
-      break;
-    case 6:
-      digitalWrite(IN1, HIGH);
-      digitalWrite(IN2, HIGH);
-      digitalWrite(IN3, HIGH);
-      digitalWrite(IN4, LOW);
-      break;
-    case 7:
       digitalWrite(IN1, LOW);
       digitalWrite(IN2, HIGH);
       digitalWrite(IN3, HIGH);
       digitalWrite(IN4, LOW);
       break;
-    default:
-      digitalWrite(IN1, HIGH);
-      digitalWrite(IN2, HIGH);
+    case 4:
+      digitalWrite(IN1, LOW);
+      digitalWrite(IN2, LOW);
+      digitalWrite(IN3, HIGH);
+      digitalWrite(IN4, LOW);
+      break;
+    case 5:
+      digitalWrite(IN1, LOW);
+      digitalWrite(IN2, LOW);
       digitalWrite(IN3, HIGH);
       digitalWrite(IN4, HIGH);
+      break;
+    case 6:
+      digitalWrite(IN1, LOW);
+      digitalWrite(IN2, LOW);
+      digitalWrite(IN3, LOW);
+      digitalWrite(IN4, HIGH);
+      break;
+    case 7:
+      digitalWrite(IN1, HIGH);
+      digitalWrite(IN2, LOW);
+      digitalWrite(IN3, LOW);
+      digitalWrite(IN4, HIGH);
+      break;
+    default:
+      digitalWrite(IN1, LOW);
+      digitalWrite(IN2, LOW);
+      digitalWrite(IN3, LOW);
+      digitalWrite(IN4, LOW);
       break;
   }
   nextStep();
